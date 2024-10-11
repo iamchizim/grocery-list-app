@@ -3,22 +3,56 @@ import { useState } from "react";
 
 const GroceryListApp = () => {
   const [groceryItems, setGroceryItems] = useState([]);
-  const [newItem, setNewItem] = useState(''); 
+  const [newItem, setNewItem] = useState("");
+  const [editItemId, setEditItemId] = useState(null);
+
+  let idCounter = 0;
+
+  const generateId = () => {
+    return ++idCounter;
+  };
 
   const addItem = () => {
-    if (newItem.trim()) { 
-      setGroceryItems((prevItems) => [...prevItems, newItem]); 
-      setNewItem('');
+    const newGroceryItem = {
+      id: generateId(),
+      name: newItem,
+    };
+    setGroceryItems((prevItems) => [...prevItems, newGroceryItem]);
+    setNewItem("");
+  };
+
+  const editItem = (id) => {
+    const itemToEdit = groceryItems.find((item) => item.id === id);
+    if (itemToEdit) {
+      setNewItem(itemToEdit.name);
+      setEditItemId(id);
     }
   };
-  const deleteItem = (itemToDelete) => {
+
+  const updateItem = () => {
+    if (editItemId && newItem.trim()) {
+      setGroceryItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === editItemId ? { ...item, name: newItem } : item
+        )
+      );
+      setNewItem("");
+      setEditItemId(null);
+    }
+  };
+
+  const deleteItem = (idToDelete) => {
     setGroceryItems((prevItems) =>
-      prevItems.filter((item) => item !== itemToDelete)
+      prevItems.filter((item) => item.id !== idToDelete)
     );
   };
 
-  const editItem = () =>{
-    
-  }
+  return (
+    <section>
+      <h1>GROCERY LIST APP</h1>
+      <input type="text" onChange={(e) => setNewItem(e.target.value)} />
+      <button onClick={addItem}>Add Item</button>
+  
+    </section>
+  );
 };
-setItemId ((prevId) => prevId + 1)
