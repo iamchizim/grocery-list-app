@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import GroceryList from "./GroceryList";
+import GroceryItem from "./GroceryItem";
 
 const GroceryListApp = () => {
   const [groceryItems, setGroceryItems] = useState([]);
@@ -51,7 +53,7 @@ const GroceryListApp = () => {
     <section>
       <h1>GROCERY LIST APP</h1>
       <input type="text" onChange={(e) => setNewItem(e.target.value)} />
-      <button onClick={addItem}>Add Item</button>
+      <button onClick={addItem}>Add Item or Update Edited Item</button>
   
     </section>
   );

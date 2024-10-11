@@ -1,3 +1,6 @@
 import React from "react";
 
-c
+const GroceryList = ({props}) =>{
+
+}
+export default GroceryList;
