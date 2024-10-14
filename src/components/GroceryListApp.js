@@ -7,6 +7,7 @@ const GroceryListApp = () => {
   const [groceryItems, setGroceryItems] = useState([]);
   const [newItem, setNewItem] = useState("");
   const [editItemId, setEditItemId] = useState(null);
+  const [toggleComplete, setToggleComplete] = useState(false)
 
   let idCounter = 0;
 
@@ -18,6 +19,7 @@ const GroceryListApp = () => {
     const newGroceryItem = {
       id: generateId(),
       name: newItem,
+      toggleComplete: false
     };
     setGroceryItems((prevItems) => [...prevItems, newGroceryItem]);
     setNewItem("");
@@ -49,12 +51,24 @@ const GroceryListApp = () => {
     );
   };
 
+  const handleToggleComplete = () => {
+    setToggleComplete((prevState) => !prevState);
+  };
+  
+
   return (
     <section>
       <h1>GROCERY LIST APP</h1>
       <input type="text" onChange={(e) => setNewItem(e.target.value)} />
       <button onClick={addItem}>Add Item or Update Edited Item</button>
-  
-    </section>
+      <GroceryList 
+     groceryItems={groceryItems}
+        editItem={editItem}
+        deleteItem={deleteItem}
+        handleToggleComplete={handleToggleComplete}/>
+
+  </section>
   );
 };
+
+export default GroceryListApp;
