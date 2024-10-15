@@ -1,20 +1,24 @@
 import React from "react";
 
-const GroceryItem = ({ props }) => {
-  const { editItem, deleteItem, newItem } = props;
+const GroceryItem = ({
+  editItem,
+  deleteItem,
+  newItem,
+  toggleComplete,
+}) => {
   return (
     <section>
-      <p>{newItem}</p> <button onClick={editItem}>Edit</button>{" "}
-      <button onClick={deleteItem}>Delete</button>{" "}
-      <button
-        onClick={handleToggleComplete}
+      <p
         style={{
-          textDecoration: toggleComplete ? "line-through" : "none",
-          cursor: "pointer",
-          padding: "8px",
+          textDecoration: newItem.toggleComplete ? "line-through" : "none",
         }}
       >
-        Bought
+        {newItem.name}
+      </p>
+      <button onClick={editItem}>Edit</button>
+      <button onClick={deleteItem}>Delete</button>
+      <button onClick={toggleComplete}>
+        {toggleComplete ? "Bought" : "Unmark"}
       </button>
     </section>
   );

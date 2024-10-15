@@ -7,7 +7,7 @@ const GroceryListApp = () => {
   const [groceryItems, setGroceryItems] = useState([]);
   const [newItem, setNewItem] = useState("");
   const [editItemId, setEditItemId] = useState(null);
-  const [toggleComplete, setToggleComplete] = useState(false)
+
 
   let idCounter = 0;
 
@@ -51,21 +51,28 @@ const GroceryListApp = () => {
     );
   };
 
-  const handleToggleComplete = () => {
-    setToggleComplete((prevState) => !prevState);
+  const toggleComplete = (id) => {
+    setGroceryItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, toggleComplete: !item.toggleComplete } : item
+      )
+    );
   };
+  
   
 
   return (
     <section>
       <h1>GROCERY LIST APP</h1>
-      <input type="text" onChange={(e) => setNewItem(e.target.value)} />
-      <button onClick={addItem}>Add Item or Update Edited Item</button>
-      <GroceryList 
+      <input type="text" onChange={(e) => setNewItem(e.target.value)} value={newItem}/>
+      <button onClick={editItemId ? updateItem : addItem}>
+        {editItemId ? "Update Item" : "Add Item"}
+      </button>
+      <GroceryList
      groceryItems={groceryItems}
         editItem={editItem}
         deleteItem={deleteItem}
-        handleToggleComplete={handleToggleComplete}/>
+        toggleComplete={toggleComplete}/>
 
   </section>
   );

@@ -13,9 +13,9 @@ const GroceryList = ({
         <GroceryItem
           key={newItem.id}
           newItem={newItem}
-          editItem={editItem}
-          deleteItem={deleteItem}
-          toggleComplete={toggleComplete}
+          editItem={() => editItem(newItem.id)}
+          deleteItem={() => deleteItem(newItem.id)}
+          toggleComplete={() => toggleComplete(newItem.id)}
         />
       ))}
     </section>
